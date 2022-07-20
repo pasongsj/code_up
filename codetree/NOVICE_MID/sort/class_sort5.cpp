@@ -8,7 +8,7 @@ class People{
         string name;
         int height;
         double weight;
-        People(string name="",int height=0,int weight=0){
+        People(string name="",int height=0,double weight=0){
             this->name = name;
             this->height = height;
             this->weight = weight;
