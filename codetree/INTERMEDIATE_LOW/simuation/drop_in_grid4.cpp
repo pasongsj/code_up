@@ -41,12 +41,14 @@ void gravity(char d){
             x = 3;
             y = j;
             for(int i=3;i>=0;i--){
-                if(arr[i][j]!=0)    ch_arr[x--][y] = arr[i][j];
+                if(arr[i][j]!=0){
+                    ch_arr[x--][y] = arr[i][j];
+                }
             }
         }
     }
     for(int i=0;i<4;i++){
-        for(int j=0;j>4;j++){
+        for(int j=0;j<4;j++){
             arr[i][j] = ch_arr[i][j];
             ch_arr[i][j] = 0;
         }
@@ -105,30 +107,17 @@ int main(){
     }
     cin >> d;
 
-    for(int i=0;i<4;i++){
-        for(int j=0;j<4;j++)    cout << arr[i][j] <<' ';
-        cout<<endl;
-    }
-    cout<<endl;
     gravity(d);
-
-    for(int i=0;i<4;i++){
-        for(int j=0;j<4;j++)    cout << arr[i][j] <<' ';
-        cout<<endl;
-    }
-    cout<<endl;
     combine(d);
-
+    gravity(d);
+    
     for(int i=0;i<4;i++){
         for(int j=0;j<4;j++)    cout << arr[i][j] <<' ';
         cout<<endl;
     }
     cout<<endl;
-    gravity(d);
-    for(int i=0;i<4;i++){
-        for(int j=0;j<4;j++)    cout << arr[i][j] <<' ';
-        cout<<endl;
-    }
+
+  
     //gravity(d);
     return 0;
     //중력작용
