@@ -1,32 +1,31 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
-int cmp(const std::pair<int, int> a, const std::pair<int, int> b)
-{
-	if (a.first == b.first)
-	{
-		return a.second < b.second;
-	}
-	return a.first > b.first;
-}
 int main()
 {
 	int n;
 	std::cin >> n;
-	std::vector<std::pair<int,int>> arr;
-	std::vector<int> length;
+	std::vector<int> arr;
+	std::vector<int> dp;
 
-	for (int i = 0;i < n;++i)
+	int answer = 0;
+	arr.resize(n);
+	dp.resize(n);
+	for (int i = 0; i < n; ++i)
 	{
-		int tmp;
-		std::cin >> tmp;
-		arr.push_back(std::make_pair(tmp, i));
+		std::cin >> arr[i];
+		int max = 0;
+		for (int j = 0; j < i; ++j)
+		{
+			if (arr[j] > arr[i])
+			{
+				max = max > dp[j] ? max : dp[j];
+			}
+		}
+		dp[i] = max + 1;
+		answer = answer > dp[i] ? answer : dp[i];
 	}
-	std::sort(arr.begin(), arr.end(), cmp);
 
-	length.resize(n);
-
-
+	std::cout << answer;
 	return 0;
 }
