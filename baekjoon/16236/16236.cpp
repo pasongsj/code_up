@@ -2,12 +2,10 @@
 #include <vector>
 #include <queue>
 
-int bfs(int r, int c, int nx, int ny, int cur_size, int cnt, const std::vector<std::vector<int>>&arr)
+
+bool in_range(int x, int y, int n)
 {
-	if (r == nx && c == ny)
-	{
-		return cnt;
-	}
+	return 0 <= x && x < n && 0 <= y && y < n;
 }
 
 int main()
@@ -15,12 +13,15 @@ int main()
 	int n;
 	std::cin >> n;
 	std::vector<std::vector<int>> arr;
+	std::vector<std::vector<int>> visited;
 	arr.resize(n);
+	visited.resize(n);
 	int r = 0, c = 0;
 	int m = 0;
 	for (int i = 0;i < n;++i)
 	{
 		arr[i].resize(n);
+		visited[i].resize(n);
 		for (int j = 0;j < n;++j)
 		{
 			std::cin >> arr[i][j];
@@ -40,10 +41,10 @@ int main()
 	int cursize = 2;
 	int eatcnt = 0;
 	int ans = 0;
-	while (m > 0)
+	while (true)
 	{
 		int nx = r, ny = c;
-		int range = 401;
+		int range = INT_MAX;
 		bool Eaten = false;
 		for (int i = 0;i < n;++i)
 		{
@@ -61,25 +62,53 @@ int main()
 						Eaten = true;
 
 					}
-					else if (curdiff == range)
+					else if (curdiff == range &&(i < nx || i == nx && j < ny) )
 					{
-						if (i<nx || i == nx && j<ny)
-						{
-							nx = i;
-							ny = j;
-							range = curdiff;
-							Eaten = true;
-						}
+						nx = i;
+						ny = j;
+						range = curdiff;
+						Eaten = true;
+
 					}
 				}
 			}
 		}
+
+		for (int i = 0;i < n;++i)
+		{
+			for (int j = 0;j < n;++j)
+			{
+				visited[i][j] = INT_MAX;
+			}
+		}
+
+		const int n_x[4] = {1,-1,0,0};
+		const int n_y[4] = { 0,0,1,-1 };
 		if (true == Eaten)
 		{
 			arr[nx][ny] = 0;
 
-			//ans += abs(nx - r) + abs(ny - c); // 최단거리 만들기
-			ans += bfs(r, c, nx, ny, 0, arr);
+			//bfs
+			std::queue<std::pair<int,int>> q;
+			q.push(std::make_pair(r, c));
+			visited[r][c] = 0;
+			while (!q.empty())
+			{
+				std::pair<int, int> cur = q.front();
+				q.pop();
+				for (int k = 0;k < 4;++k)
+				{
+					int nextX = cur.first + n_x[k];
+					int nextY = cur.second + n_y[k];
+					if (true == in_range(nextX, nextY, n) && visited[nextX][nextY] > visited[cur.first][cur.second]+1 && arr[nextX][nextY]<= cursize)
+					{
+						q.push(std::make_pair(nextX, nextY));
+						visited[nextX][nextY] = visited[cur.first][cur.second] + 1;
+					}
+				}
+
+			}
+			ans += visited[nx][ny];
 
 
 			r = nx;
