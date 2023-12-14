@@ -15,25 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\programmers\Lv1\K번째수.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\programmers\Lv1\같은숫자는싫어.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\programmers\Lv1\모의고사.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\programmers\Lv1\약수의합.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\programmers\Lv1\올바른괄호.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\programmers\Lv1\짝수와홀수.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\programmers\Lv1\평균구하기.cpp">
+    <ClCompile Include="num5.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

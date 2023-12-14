@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\programmers\Lv4\도둑질.cpp">
+    <ClCompile Include="num5.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
