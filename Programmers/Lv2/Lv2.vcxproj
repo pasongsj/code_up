@@ -139,6 +139,7 @@
     <ClCompile Include="방문길이.cpp" />
     <ClCompile Include="위장.cpp" />
     <ClCompile Include="이진변환반복하기.cpp" />
+    <ClCompile Include="전력망을둘로나누기.cpp" />
     <ClCompile Include="전화번호목록.cpp" />
     <ClCompile Include="최댓값과최솟값.cpp" />
     <ClCompile Include="최솟값만들기.cpp" />
