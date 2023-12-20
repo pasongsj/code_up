@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <crtdbg.h>
 
 
 template <typename T>
@@ -23,11 +23,6 @@ public:
 
 	T& operator[](size_t index)
 	{
-		if (index >= m_size)
-		{
-			// 오류메세지
-			return nullptr;
-		}
 		return arr[index];
 	}
 
@@ -120,6 +115,11 @@ private:
 
 int main()
 {
+
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+	int* a = new int(); // 릭 확인용
+
 	vector<int> Tmpvec(5);
 
 	Tmpvec.push_back(7);
