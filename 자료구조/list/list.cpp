@@ -1,38 +1,14 @@
 #include <iostream>
 #include <crtdbg.h>
 
-template <typename T>
+//template <typename T>
 class list
 {
-public:
+private:
 
 	class Node
 	{
-		friend class list;
 	public:
-		Node& operator++()
-		{
-			if (this->Next != nullptr)
-			{
-				this = this->Next;
-				return this;
-			}
-			return nullptr;
-		}
-
-		Node& operator--()
-		{
-			if (this->Prev != nullptr)
-			{
-				this = this->Prev;
-				return this;
-			}
-			return nullptr;
-		}
-
-		T m_value;
-
-	private:
 
 		Node()
 			:Prev(nullptr), Next(nullptr), m_value(0)
@@ -70,160 +46,207 @@ public:
 				Prev = nullptr;
 			}
 		}
-		
 		Node* Prev;
 		Node* Next;
+		int m_value;
 	};
+private:
+	int m_size;
+	Node* m_head;
+	Node* m_tail;
 
+public:
+	class iterator {	
+		friend class list;
+		Node* iterNode;
+	public:
+
+		iterator() 
+		{
+			iterNode = new Node;
+		}
+		iterator(list* _list,Node* _node) : iterNode(_node)
+		{
+		};		
+
+		~iterator() 
+		{
+			iterNode = nullptr;
+		}
+
+		iterator& operator++() {					
+			iterNode = iterNode->Next;
+			return *this;
+		}
+
+		iterator& operator--() {					
+			iterNode = iterNode->Prev;
+			return *this;
+		}
+
+		int operator*() {		
+			if (nullptr == iterNode)
+			{
+				return 0;
+			}
+			return iterNode->m_value;
+		}
+
+		bool operator !=(const iterator& other) {		
+			return iterNode != other.iterNode;
+		}
+
+		bool operator ==(const iterator& other) {	
+			return iterNode == other.iterNode;
+		}
+		Node* operator&() {							
+			return iterNode;
+		}
+
+		//iterator erase(iterator pos) {			//건네받은 iterator값 삭제하고 그다읍값 반환
+		//	Node* node = &pos;
+		//	Node* preNode = node->Prev;
+		//	Node* nextNode = node->Next;
+		//	delete node;
+		//	preNode->Prev = nextNode;
+		//	nextNode->Next = preNode;
+		//	m_size--;
+
+		//	return iterator(nextNode);
+		//}
+	};
 
 
 	// 생성자 
 	list(int temp = 0) 
 	{
-
 		m_size = 0;
-		m_begin_iter = m_end_iter = new Node();
+		m_head = new Node();
+		m_tail = new Node(m_head);
 
-		Node* cur_iter = m_begin_iter;
-		for (; m_size < temp; ++m_size)
-		{
-			new Node(cur_iter);
-			cur_iter = cur_iter->Next;
-		}
-		m_end_iter = cur_iter;
+		resize(temp);
+	}
+	list(int temp = 0, int val)
+	{
+		m_size = 0;
+		m_head = new Node();
+		m_tail = new Node(m_head);
+
+		resize(temp, val);
 	}
 
 	// 소멸자
 	~list() {
-		Node* tmpiter = m_begin_iter;
-		while (nullptr != tmpiter && tmpiter != m_end_iter)
-		{
-			tmpiter = tmpiter->Next;
-			if (nullptr != tmpiter->Prev)
-			{
-				delete tmpiter->Prev;
-			}
-		}
+		clear();
 
-		delete m_end_iter;
+		delete m_head;
+		m_head = nullptr;
+
+		delete m_tail;
+		m_tail = nullptr;
 	}
 
 
 
-	T& operator[](size_t index)
-	{
-		Node* check_iter = m_begin_iter;
-		for (int i = 0; i < index; ++i)
-		{
-			if (nullptr != check_iter->Next)
-			{
-				check_iter = check_iter->Next;
-			}
-		}
-		
-		return check_iter->m_value;
-	}
+	//T& operator[](size_t index)
+	//{
+	//	Node* check_iter = m_head->Next;
+	//	for (int i = 0; i < index; ++i)
+	//	{
+	//		if (nullptr != check_iter->Next)
+	//		{
+	//			check_iter = check_iter->Next;
+	//		}
+	//	}
+	//	
+	//	return check_iter->m_value;
+	//}
 
-	void push_back(T num)
+	void push_back(int num)
 	{
-		m_end_iter->m_value = num;
-		m_end_iter = new Node(m_end_iter);
+		m_tail->m_value = num;
+		new Node(m_tail);
+		m_tail = m_tail->Next;
 		m_size++;
 	}
 
 	void pop_back()
 	{
-		Node* next_end_iter = m_end_iter->Prev;
-		delete m_end_iter;
-		m_end_iter = next_end_iter;
+		m_tail = m_tail->Prev;
+		delete m_tail->Next;
 		m_size--;
 	}
 
-	void Push_front(T num)
+	void Push_front(int num)
 	{
-		m_end_iter = Node(nullptr, m_end_iter);
-		m_end_iter->m_value = num;
+		m_head->m_value = num;
+		new Node(nullptr, m_head);
+		m_head = m_head->Prev;
 		m_size++;
 	}
 
 	void pop_front()
 	{
-		Node* next_begin_iter = m_begin_iter->Next;
-		delete m_begin_iter;
-		m_begin_iter = next_begin_iter;
+		m_head = m_head->Next;
+		delete m_head->Prev;
 		m_size--;
 	}
 
-	Node* insert(Node* _iter, T _k)
+
+	iterator begin() {						
+		return iterator(this, m_head->Next);
+	}
+	iterator end() {						
+		return iterator(this, m_tail);
+	}
+	bool empty()
 	{
-		if (nullptr == _iter)
+		return 0 == m_size;
+	}
+
+	int front() const
+	{
+		if (0 < m_size)
 		{
-			return nullptr;
+			return m_head->Next->m_value;
 		}
-		if (_iter == m_begin_iter)
+		else
 		{
-			Push_front(_k);
-			return m_begin_iter;
+			return -1;
 		}
-		new Node(_iter->Prev, _iter);
-		_iter->Prev = _k;
-		m_size++;
 	}
 
-	Node* begin() const
+	int back() const
 	{
-		return m_begin_iter;
-	}
-
-
-	Node* end() const
-	{
-		return m_end_iter;
-	}
-
-	T front() const
-	{
-		if (m_size == 0)
+		if (0 < m_size)
 		{
-			return 0;
+			return m_tail->Prev->m_value;
 		}
-		return m_begin_iter->m_value;
-	}
-
-	T back() const
-	{
-		if (m_size == 0)
+		else
 		{
-			return 0;
+			return -1;
 		}
-		return m_end_iter->Prev->m_value;
 	}
 
-	Node* erase(Node* _iter)
+	void resize(const size_t n, int val = 0)
 	{
-		if (nullptr == _iter && _iter != m_end_iter)
+		if (m_size < n)
 		{
-			return nullptr;
+			return;
 		}
-		Node* PrevNode = _iter->Prev;
-		Node* NextNode = _iter->Next;
-		delete _iter;
 
-		PrevNode->Next = NextNode;
-		NextNode->Prev = PrevNode;
-
-		return NextNode;
+		Node* cur_iter = m_tail->Prev;
+		for (; m_size <= n; ++m_size)
+		{
+			Node* l_prev = cur_iter;
+			Node* l_next = cur_iter->Next;
+			new Node(l_prev, l_next);
+			cur_iter = cur_iter->Next;
+			cur_iter->m_value = val;
+		}
 	}
 
-	void resize(const size_t n, T val = 0)
-	{
 
-	}
-
-	void reserve(int n)
-	{
-
-	}
 
 	//vector.size()
 	size_t size()
@@ -234,19 +257,24 @@ public:
 
 	void clear()
 	{
+		Node* cur_iter = m_head->Next;
+		while (true)
+		{
+			if (cur_iter == m_tail)
+			{
+				break;
+			}
+			cur_iter = cur_iter->Next;
+			delete cur_iter->Prev;
+		}
+		m_head->Next = m_tail;
+		m_tail->Prev = m_head;
 		m_size = 0;
 	}
 
-	bool empty()
-	{
-		return static_cast<bool>(m_size);
-	}
+	
 
-private:
 
-	Node* m_begin_iter;
-	Node* m_end_iter;
-	size_t m_size;
 };
 
 
@@ -257,39 +285,22 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	int* a = new int(); // 릭 확인용
 
-	list<int> Tmpvec(5);
+	list Tmpvec(5,7);
 
-	for (int i = 0; i < 5; ++i)
-	{
-		Tmpvec[i] = -i;
-	}
 	
 	Tmpvec.push_back(7);
 
-	for (size_t i = 0; i < Tmpvec.size(); ++i)
-	{
-		std::cout << Tmpvec[i] << ' ';
-	}
+	
 	std::cout << '\n';
 
-	Tmpvec[4] = 2;
+	
 
-	for (size_t i = 0; i < Tmpvec.size(); ++i)
-	{
-		std::cout << Tmpvec[i] << ' ';
-	}
-	std::cout << '\n';
+	list::iterator it = Tmpvec.begin();
+	list ::iterator endit = Tmpvec.end();
 
-	list<int>::Node* startiter = Tmpvec.begin();
-	list<int>::Node* enditer = Tmpvec.end();
-
-	startiter++;
+	++it;
 
 
-	for (; startiter != enditer; startiter++)
-	{
-		std::cout << startiter->m_value << ' ';
-	}
 	std::cout << '\n';
 
 	return 0;
