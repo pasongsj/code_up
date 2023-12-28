@@ -13,7 +13,7 @@ int main()
 	curmap->insert({ 2,4 });
 	curmap->insert({ 1,1 });
 
-
+	//curmap->erase(1);
 	map::iterator it = curmap->begin();
 	map::iterator endit = curmap->end();
 

@@ -96,6 +96,8 @@ public:
 		{
 			return;
 		}
+		find_iter.CurNode->erase();
+		delete find_iter.CurNode;
 	};
 	//find
 	iterator find(const int& _Key)
@@ -246,6 +248,96 @@ private:
 				return;
 			}
 		};
+
+		void erase()
+		{
+			//if (nullptr == left_child && nullptr == right_child)
+			//{
+			//	if (nullptr != parent_node)
+			//	{
+			//		if (this == parent_node->right_child)
+			//		{
+			//			parent_node->right_child = nullptr;
+			//		}
+			//		else if (this == parent_node->left_child)
+			//		{
+			//			parent_node->left_child = nullptr;
+			//		}
+			//	}
+			//}
+			//if (nullptr != right_child)
+			//{
+			//	swap(right_child->MinNode());
+			//	return;
+			//}
+			//else if (nullptr != left_child)
+			//{
+			//	swap(left_child->MaxNode());
+			//}
+		}
+
+		void swap(BinTreeNode* other)
+		{
+			BinTreeNode* tmpa_parent =	this->parent_node;
+			BinTreeNode* tmpa_left =	this->left_child;
+			BinTreeNode* tmpa_right =	this->right_child;
+
+			BinTreeNode* tmpb_parent = other->parent_node;
+			BinTreeNode* tmpb_left = other->left_child;
+			BinTreeNode* tmpb_right = other->right_child;
+			
+			if (nullptr != tmpa_parent)
+			{
+				if (tmpa_parent->NodePair.key < this->NodePair.key) // 오른쪽자식
+				{
+					tmpa_parent->right_child = other;
+				}
+				else
+				{
+					tmpa_parent->left_child = other;
+				}
+			}
+			
+			if(nullptr != tmpa_left)
+			{
+				tmpa_left->parent_node = other;
+			}
+			if (nullptr != tmpa_right)
+			{
+				tmpa_right->parent_node = other;
+			}
+
+			if (nullptr != tmpb_parent)
+			{
+				if (tmpb_parent->NodePair.key < other->NodePair.key) // 오른쪽자식
+				{
+					tmpb_parent->right_child = this;
+				}
+				else
+				{
+					tmpb_parent->left_child = this;
+				}
+			}
+			if (nullptr != tmpb_left)
+			{
+				tmpb_left->parent_node = this;
+			}
+			if (nullptr != tmpb_right)
+			{
+				tmpb_right->parent_node = this;
+			}
+
+
+			this->parent_node = tmpb_parent;
+			this->left_child = tmpb_left;
+			this->right_child = tmpb_right;
+
+
+
+			other->parent_node = tmpa_parent;
+			other->left_child = tmpa_left;
+			other->right_child = tmpa_right;
+		}
 	};
 
 	BinTreeNode* RootNode;
