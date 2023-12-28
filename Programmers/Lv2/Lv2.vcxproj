@@ -131,6 +131,7 @@
     <ClCompile Include="JadenCase.cpp" />
     <ClCompile Include="N개의최소공배수_1.cpp" />
     <ClCompile Include="N개의최소공배수_2.cpp" />
+    <ClCompile Include="[PCCP 기출문제] 2번.cpp" />
     <ClCompile Include="가장큰수.cpp" />
     <ClCompile Include="게임맵최단거리.cpp" />
     <ClCompile Include="괄호회전하기.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="프린터.cpp" />
     <ClCompile Include="피보나치수.cpp" />
     <ClCompile Include="행렬의곱셈.cpp" />
+    <ClCompile Include="후보키.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
