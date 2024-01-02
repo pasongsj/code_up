@@ -298,7 +298,10 @@ int main()
 	list::iterator it = Tmpvec.begin();
 	list ::iterator endit = Tmpvec.end();
 
-	++it;
+	for (; it != endit; ++it)
+	{
+		std::cout << *it << std::endl;
+	}
 
 
 	std::cout << '\n';
