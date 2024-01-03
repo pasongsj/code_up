@@ -55,5 +55,8 @@
     <ClCompile Include="보석쇼핑.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="경주로건설.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

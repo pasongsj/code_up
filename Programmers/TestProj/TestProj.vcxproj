@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{4dc6833b-8ef0-40fa-a4ac-18be2e5f59e6}</ProjectGuid>
-    <RootNamespace>Lv3</RootNamespace>
+    <ProjectGuid>{b3d6a2be-766f-453b-81ff-f18c43e60317}</ProjectGuid>
+    <RootNamespace>TestProj</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,23 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="경주로건설.cpp" />
-    <ClCompile Include="기지국설치.cpp" />
-    <ClCompile Include="네트워크.cpp" />
-    <ClCompile Include="단속카메라1.cpp" />
-    <ClCompile Include="단속카메라2.cpp" />
-    <ClCompile Include="단어변환.cpp" />
-    <ClCompile Include="등굣길.cpp" />
-    <ClCompile Include="디스크컨트롤러.cpp" />
-    <ClCompile Include="베스트앨범.cpp" />
-    <ClCompile Include="보석쇼핑.cpp" />
-    <ClCompile Include="불량사용자.cpp" />
-    <ClCompile Include="야근지수.cpp" />
-    <ClCompile Include="이중우선순위큐.cpp" />
-    <ClCompile Include="입국심사.cpp" />
-    <ClCompile Include="정수삼각형1.cpp" />
-    <ClCompile Include="정수삼각형2.cpp" />
-    <ClCompile Include="합승택시요금.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
