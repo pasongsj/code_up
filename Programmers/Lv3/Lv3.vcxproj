@@ -138,6 +138,7 @@
     <ClCompile Include="베스트앨범.cpp" />
     <ClCompile Include="보석쇼핑.cpp" />
     <ClCompile Include="불량사용자.cpp" />
+    <ClCompile Include="셔틀버스.cpp" />
     <ClCompile Include="야근지수.cpp" />
     <ClCompile Include="이중우선순위큐.cpp" />
     <ClCompile Include="입국심사.cpp" />
