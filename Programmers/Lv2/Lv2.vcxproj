@@ -143,6 +143,7 @@
     </ClCompile>
     <ClCompile Include="멀리뛰기.cpp" />
     <ClCompile Include="방문길이.cpp" />
+    <ClCompile Include="삼각달팽이.cpp" />
     <ClCompile Include="위장.cpp" />
     <ClCompile Include="이진변환반복하기.cpp" />
     <ClCompile Include="전력망을둘로나누기.cpp" />
@@ -154,9 +155,11 @@
     <ClCompile Include="캐시.cpp" />
     <ClCompile Include="타겟넘버.cpp" />
     <ClCompile Include="튜플.cpp" />
+    <ClCompile Include="파일명정렬.cpp" />
     <ClCompile Include="프린터.cpp" />
     <ClCompile Include="피보나치수.cpp" />
     <ClCompile Include="행렬의곱셈.cpp" />
+    <ClCompile Include="혼자놀기의달인.cpp" />
     <ClCompile Include="후보키.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
