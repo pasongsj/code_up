@@ -149,6 +149,7 @@
     <ClCompile Include="전력망을둘로나누기.cpp" />
     <ClCompile Include="전화번호목록.cpp" />
     <ClCompile Include="점프와순간이동.cpp" />
+    <ClCompile Include="주식가격.cpp" />
     <ClCompile Include="최댓값과최솟값.cpp" />
     <ClCompile Include="최솟값만들기.cpp" />
     <ClCompile Include="카펫.cpp" />
