@@ -159,6 +159,7 @@
     <ClCompile Include="파일명정렬.cpp" />
     <ClCompile Include="프린터.cpp" />
     <ClCompile Include="피보나치수.cpp" />
+    <ClCompile Include="할인행사.cpp" />
     <ClCompile Include="행렬의곱셈.cpp" />
     <ClCompile Include="혼자놀기의달인.cpp" />
     <ClCompile Include="후보키.cpp" />
