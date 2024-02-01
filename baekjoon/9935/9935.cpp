@@ -4,55 +4,49 @@
 
 #include <iostream>
 #include <string>
-#include <list>
+#include <vector>
+
 int main()
 {
 	std::string str, bomb;
 	std::cin >> str >> bomb;
 
-
-	int bomb_len = bomb.size();
-	while (true)
+	std::vector<char> strvec;
+	
+	for (int i = 0; i < str.size(); ++i)
 	{
-		bool is_bomb = false;
-		std::list<int> bomb_index;
-		int cur_index = 0;
-
-		while (true)
+		strvec.push_back(str[i]);
+		if (str[i] == bomb.back())
 		{
-			if (std::string::npos == str.find(bomb, cur_index))
+			bool is_same = true;
+			for (int j = 1; j <= bomb.size(); ++j)
 			{
+				if (strvec.size() - j >= 0 && strvec[strvec.size() - j] == bomb[bomb.size() - j])
+				{
+					continue;
+				}
+				is_same = false;
 				break;
 			}
-			cur_index = str.find(bomb, cur_index);
-			bomb_index.push_back(cur_index);
-			cur_index += bomb_len;
-			is_bomb = true;
-		}
-
-		std::string tmpstr = "";
-		for (int i = 0; i < str.size(); ++i)
-		{
-			if (false == bomb_index.empty() && i == bomb_index.front())
+			if (true == is_same)
 			{
-				bomb_index.pop_front();
-				i += bomb_len-1;
-				continue;
+				for (int j = 0; j < bomb.size(); ++j)
+				{
+					strvec.pop_back();
+				}
 			}
-			tmpstr += str[i];
-		}
-
-		str = tmpstr;
-
-		if (false == is_bomb)
-		{
-			break;
 		}
 	}
-	if (0 == str.length())
+	if (0 == strvec.size())
 	{
-		str = "FRULA";
+		std::cout<<"FRULA";
 	}
-	std::cout << str;
+	else
+	{
+		for (char _a : strvec)
+		{
+			std::cout << _a;
+		}
+	}
 	return 0;
 }
