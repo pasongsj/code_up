@@ -133,6 +133,7 @@
     <ClCompile Include="약수의합.cpp" />
     <ClCompile Include="올바른괄호.cpp" />
     <ClCompile Include="짝수와홀수.cpp" />
+    <ClCompile Include="체육복.cpp" />
     <ClCompile Include="평균구하기.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

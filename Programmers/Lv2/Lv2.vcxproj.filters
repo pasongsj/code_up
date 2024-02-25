@@ -106,5 +106,8 @@
     <ClCompile Include="할인행사.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="호텔대실.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
