@@ -24,7 +24,7 @@ int get_apple(int& s, int& e, int cur)
 int main()
 {
 	int answer = 0;
-	int n, m, j ;
+	int n, m, j;
 	std::cin >> n >> m >> j;
 	int s = 1;
 	int e = m;
