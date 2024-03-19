@@ -28,7 +28,7 @@ int main()
         arr1[1] = (arr1[1] == '0' ? '1' : '0');
         cnt1++;
     }
-	for (int i = 1; i < n-1; ++i)
+    for (int i = 1; i < n - 1; ++i)
     {
         if (arr1[i - 1] != ans[i - 1])
         {
@@ -42,35 +42,38 @@ int main()
         }
     }
     int answer = INT_MAX;
-    if (arr1[n - 2] != ans[n - 2])
-    {
-		arr1[n - 2] = (arr1[n - 2] == '0' ? '1' : '0');
-		arr1[n - 1] = (arr1[n - 1] == '0' ? '1' : '0');
-        cnt1++;
-
-        if (arr1 == ans)
-        {
-            answer = std::min(cnt1,answer);
-        }
-    }
-    else
+    if (arr1 == ans)
     {
         answer = std::min(cnt1, answer);
     }
-    if (arr2[n - 2] != ans[n - 2])
+    else
+    {
+        arr1[n - 2] = (arr1[n - 2] == '0' ? '1' : '0');
+        arr1[n - 1] = (arr1[n - 1] == '0' ? '1' : '0');
+        cnt1++;
+        if (arr1 == ans)
+        {
+            answer = std::min(cnt1, answer);
+        }
+    }
+
+    if (arr2 == ans)
+    {
+        answer = std::min(cnt2, answer);
+    }
+    else
     {
         arr2[n - 2] = (arr2[n - 2] == '0' ? '1' : '0');
         arr2[n - 1] = (arr2[n - 1] == '0' ? '1' : '0');
         cnt2++;
-
         if (arr2 == ans)
         {
             answer = std::min(cnt2, answer);
         }
     }
-    else
+    if (answer == INT_MAX)
     {
-        answer = std::min(cnt2, answer);
+        answer = -1;
     }
     std::cout << answer;
     return 0;
