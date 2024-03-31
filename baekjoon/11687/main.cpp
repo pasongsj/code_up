@@ -1,23 +1,43 @@
 #include <iostream>
+#include <climits>
 
-int getexponent(int num)
+int GetDiv5Cnt(int _num)
 {
-	int ex = 5;
-	int cnt = 1;
-
-	int ans = 0;
-	while (num >= ex)
+	int div5 = 5;
+	int cnt = 0;
+	while (true)
 	{
-		if (num == ex)
+		if (_num < div5)
 		{
-			return -1;
+			break;
 		}
-		ans += cnt++;
-		ex *= 5;
+		cnt += (_num / div5);
+		div5 *= 5; // 5의 배수마다 확인
 	}
-	
-	return ans;
+	return cnt;
+}
 
+int GetBinarySearch(int num)
+{
+	int left = 1, right = INT_MAX;
+	int answer = -1;
+
+	while (left <= right)
+	{
+		int mid = (left + right) / 2;
+ 		int cnt = GetDiv5Cnt(mid);
+
+		if (num <= cnt)
+		{
+			right = mid - 1;
+		}
+		else
+		{
+			left = mid + 1;
+			answer = left;
+		}
+	}
+	return answer;
 }
 
 int main()
@@ -25,15 +45,16 @@ int main()
 	int m;
 	std::cin >> m;
 	int ans = 5 * m;
-	int exp = getexponent(m);
-	if (exp == -1)
+	int answer = GetBinarySearch(m);
+	if (GetDiv5Cnt(answer) == m)
 	{
-		std::cout << -1;
+		std::cout << answer;
 	}
 	else
 	{
-		std::cout << ans - 5 * exp;
+		std::cout << -1;
 	}
+
 
 	return 0;
 }
