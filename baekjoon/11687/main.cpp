@@ -29,12 +29,12 @@ int GetBinarySearch(int num)
 
 		if (num <= cnt)
 		{
+			answer = mid;
 			right = mid - 1;
 		}
 		else
 		{
 			left = mid + 1;
-			answer = left;
 		}
 	}
 	return answer;

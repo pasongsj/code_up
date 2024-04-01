@@ -3,29 +3,7 @@
 
 #include <iostream>
 #include <vector>
-
-
-int GetUpperbound(int num, const std::vector<int>& arr)
-{
-	int left = 0, right = static_cast<int>(arr.size()) - 1;
-	int ans = 0;
-	while (left<right)
-	{
-		int mid = (left + right) / 2;
-		if (arr[mid] <= num)
-		{
-			left = mid + 1;
-			ans = left;
-		}
-		else
-		{
-			right = mid;
-		}
-	}
-	return ans;
-
-}
-
+#include <algorithm>
 
 int main()
 {
@@ -38,14 +16,52 @@ int main()
 		std::cin >> arr[i];
 	}
 
+	std::sort(arr.begin(), arr.end());
 
 	std::vector<int> answer;
 	for (int j = 0; j < m; ++j)
 	{
-		int pointl, pointr;
-		std::cin >> pointl >> pointr;
+		// 1 과 10 구간
+		int s_b, e_b;
+		std::cin >> s_b >> e_b;
 
-		answer.push_back(GetUpperbound(pointr,arr) - GetUpperbound(pointl - 1,arr));
+		int start = 0, end = n - 1;
+		int answer1 = 0;
+		// 10보다 작은 수 중 최대 인덱스 값
+		if (arr[n - 1] < s_b || arr[0] > e_b)
+		{
+			answer.push_back(0);
+			continue;
+		}
+		while (start <= end)
+		{
+			int mid = (start + end) / 2;
+			if (arr[mid] <= e_b)
+			{
+				start = mid + 1;
+				answer1 = mid;
+			}
+			else
+			{
+				end = mid - 1;
+			}
+		}
+		start = 0, end = n - 1;
+		int answer0 = 0;
+		while (start <= end)
+		{
+			int mid = (start + end) / 2;
+			if (s_b <= arr[mid])
+			{
+				answer0 = mid;
+				end = mid - 1;
+			}
+			else
+			{
+				start = mid + 1;
+			}
+		}
+		answer.push_back(answer1 - answer0 + 1);
 	}
 
 	for (int num : answer)

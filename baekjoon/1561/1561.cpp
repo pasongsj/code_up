@@ -15,6 +15,7 @@ long long GetRideCnt(long long time,const std::vector<int>& _rides)
     return cnt;
 }
 
+
 int main()
 {
     int n, m;
@@ -26,7 +27,7 @@ int main()
         std::cin >> rides[i];
     }
 
-    long long left = 1, right = 20000000000000;
+    long long left = 1, right = 600000000000000;
 
     if (n <= m)
     {
