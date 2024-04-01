@@ -2,12 +2,68 @@
 //
 
 #include <iostream>
+#include <vector>
+
+
+long long GetRideCnt(long long time,const std::vector<int>& _rides)
+{
+    long long  cnt = 0;
+    for (long long  ride : _rides)
+    {
+		cnt += (time + ride -1) / ride;
+    }
+    return cnt;
+}
 
 int main()
 {
     int n, m;
     std::cin >> n >> m; // n명, m종류
-    std::cout << "Hello World!\n";
+    std::vector<int> rides;
+    rides.resize(m);
+    for (int i = 0; i < m; ++i)
+    {
+        std::cin >> rides[i];
+    }
+
+    long long left = 1, right = 20000000000000;
+
+    if (n <= m)
+    {
+        std::cout << n;
+        return 0;
+    }
+
+    long long mid = 0;
+    while (left <= right)
+    {
+        mid = (left + right) / 2;
+		if (GetRideCnt(mid, rides) >= n)
+        {
+			right = mid - 1;
+        }
+        else
+        {
+            left = mid + 1;
+        }
+    }
+    //std::cout << right;
+
+    int ride_cnt = 0;
+    std::vector<int> answerarr;
+    answerarr.push_back(-1);
+    for (int i = 0; i < m; ++i)
+    {
+		ride_cnt += (right - 1) / rides[i] + 1;
+        if (right % rides[i] == 0)
+        {
+            answerarr.push_back(i+1);
+        }
+    }
+
+    std::cout << answerarr[n - ride_cnt];
+    return 0;
+
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
