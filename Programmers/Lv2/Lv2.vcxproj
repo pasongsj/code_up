@@ -154,6 +154,7 @@
     <ClCompile Include="최솟값만들기.cpp" />
     <ClCompile Include="카펫.cpp" />
     <ClCompile Include="캐시.cpp" />
+    <ClCompile Include="큰수만들기.cpp" />
     <ClCompile Include="타겟넘버.cpp" />
     <ClCompile Include="튜플.cpp" />
     <ClCompile Include="파일명정렬.cpp" />
