@@ -5,26 +5,27 @@
 #include <vector>
 std::vector<int> arr;
 
-int gcd(int a, int b)
+long long gcd(long long a, long long b)
 {
     if (b == 0) return a;
     return gcd(b, a % b);
 }
 
-int lcm(int a, int b) {
+long long lcm(long long a, long long b) {
     return a * b / gcd(a, b);
 }
 
-int GetCycle(int n)
+int GetCycle(int n,std::vector<bool>& isvisted)
 {
     int cur = n;
-    int ans = 1;
+    int ans = 0;
     while(true)
     {
-        if (arr[cur] == n)
+        if (true == isvisted[cur])
         {
             break;
         }
+        isvisted[cur] = true;
         cur = arr[cur];
         ans++;
     }
@@ -34,21 +35,24 @@ int GetCycle(int n)
 int main()
 {
     int n;
-    std::vector<int> cycle;
     std::cin >> n;
     arr.resize(n + 1);
-    cycle.resize(n + 1);
 
     for (int i = 1; i <= n; ++i)
     {
         std::cin >> arr[i];
     }
 
-    int answer = 1;
+    long long answer = 1;
+    std::vector<bool> isvisted(n + 1, false);
     for (int i = 1; i <= n; ++i)
     {
-        cycle[i] = GetCycle(i);
-        answer = lcm(answer, cycle[i]);
+        if (true == isvisted[i])
+        {
+            continue; // 이미 해당 사이클에 개수를 다른곳에서 구함
+        }
+        int curcycle = GetCycle(i, isvisted);
+        answer = lcm(answer, curcycle);
     }
     std::cout << answer;
     return 0;

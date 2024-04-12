@@ -6,39 +6,26 @@
 #include <queue>
 int n;
 std::vector<std::vector<int>> graph;
-std::vector<int> grade;
 std::vector<int> Level;
+std::vector<int> Parent;
 
 void DecideLevel()
 {
     // init
     std::queue<int> q;
-    for (int i = 1; i <= n; ++i)
-    {
-        if (grade[i] == 1 && i != 1)
-        {
-            q.push(i);
-            Level[i] = 1;
-        }
-    }
-    grade[1]++;
+    q.push(1);
+    Level[1] = 1;
     while (!q.empty())
     {
         int cur = q.front();
         q.pop();
-        for (int i = 0; i < graph[cur].size(); ++i)
+        for (int next : graph[cur])
         {
-            int next = graph[cur][i];
-            grade[next]--;
-            bool isinit = false;
-            if (grade[next] == 1)
-            {
-                q.push(next);
-				Level[next] = std::max(Level[cur], Level[next]) + 1;
-            }
-			else if (grade[next] > 1 && Level[next] == 0)
+            if (0 == Level[next])
             {
                 Level[next] = Level[cur] + 1;
+                Parent[next] = cur;
+                q.push(next);
             }
         }
     }
@@ -46,45 +33,26 @@ void DecideLevel()
 
 int GetParent(int a, int b)
 {
-    std::vector<bool> isvisited(n + 1, false);
-    std::queue<int> q;
-    q.push(a);
-    while (!q.empty())
+    int max_num = Level[a] > Level[b] ? a : b;
+    int min_num = max_num != a ? a : b;
+    
+    while (true)
     {
-        int cur = q.front();
-        q.pop();
-		isvisited[cur] = true;
-        for (int i = 0; i < graph[cur].size(); ++i)
+        while (Level[max_num] > Level[min_num])
         {
-            int next = graph[cur][i];
-            if (Level[next] > Level[cur])
+            if (min_num == 1)
             {
-                q.push(next);
+                return 1;
             }
+            max_num = Parent[max_num];
         }
-    }
-
-
-    q.push(b);
-    while (!q.empty())
-    {
-        int cur = q.front();
-        q.pop();
-        if (true == isvisited[cur])
+        if (max_num == min_num)
         {
-            return cur;
+            return min_num;
         }
-        isvisited[cur] = true;
-        for (int i = 0; i < graph[cur].size(); ++i)
-        {
-            int next = graph[cur][i];
-            if (Level[next] > Level[cur])
-            {
-                q.push(next);
-            }
-        }
+        max_num = Parent[max_num];
+        min_num = Parent[min_num];
     }
-    return 1;
 }
 
 int main()
@@ -92,16 +60,14 @@ int main()
     // input
     std::cin >> n;
     graph.resize(n + 1);
-    grade.resize(n + 1);
     Level.resize(n + 1);
+    Parent.resize(n + 1);
     for (int i = 1; i < n; ++i)
     {
         int a, b;
         std::cin >> a >> b;
         graph[a].push_back(b);
         graph[b].push_back(a);
-        grade[a]++;
-        grade[b]++;
     }
 
     DecideLevel();

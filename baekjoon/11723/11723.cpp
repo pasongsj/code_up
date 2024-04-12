@@ -17,33 +17,46 @@ int main()
     for (int i = 0; i < n; ++i)
     {
         std::string input;
-		std::cin >> input;
+        std::cin >> input;
         int num;
-        if ("all" != input && "empty" != input)
+        if ('a' == input[0])
+        {
+            if ('l' == input[1])// all
+            {
+                for (int j = 1; j <= 20; ++j)
+                {
+                    AllSet.insert(j);
+                }
+
+            }
+            else// add
+            {
+                std::cin >> num;
+                AllSet.insert(num);
+            }
+        }
+        else if ('r' == input[0])
         {
             std::cin >> num;
-        }
-        if ("add" == input)
-        {
-            AllSet.insert(num);
-        }
-        else if ("remove" == input)
-        {
             AllSet.erase(num);
+
         }
-        else if ("check" == input)
+        else if ('c' == input[0])
         {
+            std::cin >> num;
             if (AllSet.end() == AllSet.find(num))
             {
-                answer.push_back(0);
+                std::cout << "0\n";
             }
             else
             {
-                answer.push_back(1);
+                std::cout << "1\n";
             }
+
         }
-        else if ("toggle" == input)
+        else if ('t' == input[0])
         {
+            std::cin >> num;
             if (AllSet.end() == AllSet.find(num))
             {
                 AllSet.insert(num);;
@@ -52,23 +65,12 @@ int main()
             {
                 AllSet.erase(num);
             }
+
         }
-        else if ("all" == input)
-        {
-            for (int j = 1; j <= 20; ++j)
-            {
-                AllSet.insert(j);
-            }
-        }
-        else if ("empty" == input)
+        else if ('e' == input[0])
         {
             AllSet.clear();
         }
-    }
-
-    for (int ans : answer)
-    {
-        std::cout << ans << '\n';
     }
 	return 0;
 }
