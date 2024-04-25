@@ -10,81 +10,40 @@ std::set<int> remainbtn;
 
 int destint;
 std::string deststring;
-int ans;
+int anscnt;
+std::string inputnumber;
 
 void DFS(std::string _str)
 {
-    if (_str.size() > deststring.size())
+    if (_str.size() == deststring.size() - 1 || _str.size() == deststring.size()
+        || _str.size() > deststring.size())
     {
-        int tmp = std::stoi(_str);
-        if (abs(tmp - destint) + _str.size() < abs(ans - destint) + std::to_string(ans).size())
-        {
-            ans = tmp;
+        if (_str.size() > 0 && anscnt > abs(destint - std::stoi(_str)) + _str.size())
+        {   
+            anscnt = abs(destint - std::stoi(_str)) + _str.size();
         }
-        return;
-    }
-    else if (_str.size() == deststring.size()-1 || _str.size() == deststring.size())
-    {
-        if(_str.size()>0)
+
+        if (_str.size() > deststring.size())
         {
-            int tmp = std::stoi(_str);
-            if (abs(tmp - destint) + _str.size() < abs(ans - destint) + std::to_string(ans).size())
-            {
-                ans = tmp;
-            }
-        }
-        
-    }
-    int index = _str.size();
-
-    if(index < deststring.size())
-    {
-        if (remainbtn.size() > 0)
-        {
-            auto it = remainbtn.lower_bound(deststring[index] - '0');
-            if (remainbtn.end() != it)
-            {
-                DFS(_str + std::to_string(*it));
-            }
-            else
-            {
-                auto nextit = remainbtn.begin();
-				if (_str.size() == 0 && *nextit == 0 && remainbtn.size() > 1)
-                {
-                    nextit++;
-                }
-                DFS(_str + std::to_string(*nextit));
-            }
-
-
-            if (remainbtn.begin() != it)
-            {
-                it--;
-                DFS(_str + std::to_string(*it));
-            }
-            else
-            {
-                it = remainbtn.end();
-                it--;
-                DFS(_str + std::to_string(*it));
-            }
+            return;
         }
     }
-    else
+    for (int num : remainbtn)
     {
-        DFS(_str + std::to_string(*remainbtn.begin()));
+        DFS(_str + std::to_string(num));
     }
-    
-    return;
 }
 
 int main()
 {
     std::cin >> destint;
     deststring = std::to_string(destint);
+
+    anscnt = abs(destint - 100);
+    //inputnumber = "100";
+
     int m;
     std::cin >> m;
-    ans = 100;
     for (int i = 0; i <= 9; ++i)
     {
         remainbtn.insert(i);
@@ -97,11 +56,9 @@ int main()
     }
 
     DFS("");
-    int answer = abs(destint - 100);
-    int comp = abs(ans - destint) + std::to_string(ans).size();
-    answer = std::min(answer, comp);
+    std::cout << anscnt;
 
-    std::cout << answer;
+    //std::cout << answer;
     return 0;
 }
 
