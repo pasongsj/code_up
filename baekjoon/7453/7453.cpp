@@ -2,14 +2,14 @@
 //
 
 #include <iostream>
-#include <unordered_map>
 #include <vector>
+#include <algorithm>
 
 int main()
 {
     int n;
     std::cin >> n;
-    std::vector<std::vector<int>> arr(n, std::vector<int>(4));
+    std::vector<std::vector<long long>> arr(n, std::vector<long long>(4));
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < 4; ++j)
@@ -17,21 +17,27 @@ int main()
             std::cin >> arr[i][j];
         }
     }
-    std::unordered_map<int, int>prev;
-    std::unordered_map<int, int>next;
+
+    std::vector<long long>prev;
+    std::vector<long long> next;
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < n; ++j)
         {
-            prev[arr[i][0] + arr[j][1]]++;
-            next[arr[i][2] + arr[j][3]]++;
+            prev.push_back(arr[i][0] + arr[j][1]);
+            next.push_back(arr[i][2] + arr[j][3]);
         }
     }
-    int ans = 0;
-    auto it = prev.begin();
-    for (; it != prev.end(); ++it)
+    long long ans = 0;
+
+    std::sort(prev.begin(), prev.end());
+    std::sort(next.begin(), next.end());
+    
+    
+    for (long long cur : prev)
     {
-        ans += it->second * next[-(it->first)];
+        long long target = -cur;
+        ans += std::upper_bound(next.begin(), next.end(), target) - std::lower_bound(next.begin(), next.end(), target);
     }
 
     std::cout << ans;
