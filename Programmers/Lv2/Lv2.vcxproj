@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="12911.cpp" />
     <ClCompile Include="H-Index.cpp" />
     <ClCompile Include="JadenCase.cpp" />
     <ClCompile Include="N개의최소공배수_1.cpp" />
