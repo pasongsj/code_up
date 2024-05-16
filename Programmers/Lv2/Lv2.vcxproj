@@ -132,6 +132,7 @@
     <ClCompile Include="JadenCase.cpp" />
     <ClCompile Include="N개의최소공배수_1.cpp" />
     <ClCompile Include="N개의최소공배수_2.cpp" />
+    <ClCompile Include="[3차] n진수 게임.cpp" />
     <ClCompile Include="[PCCP 기출문제] 2번.cpp" />
     <ClCompile Include="가장큰수.cpp" />
     <ClCompile Include="게임맵최단거리.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="배달.cpp" />
     <ClCompile Include="삼각달팽이.cpp" />
     <ClCompile Include="위장.cpp" />
+    <ClCompile Include="이모티콘 할인행사.cpp" />
     <ClCompile Include="이진변환반복하기.cpp" />
     <ClCompile Include="전력망을둘로나누기.cpp" />
     <ClCompile Include="전화번호목록.cpp" />

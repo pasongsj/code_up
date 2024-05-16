@@ -118,5 +118,11 @@
     <ClCompile Include="12911.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="[3차] n진수 게임.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="이모티콘 할인행사.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
