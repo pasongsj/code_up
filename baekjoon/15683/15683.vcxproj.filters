@@ -2,5 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="15683.cpp" />
+    <ClCompile Include="15683_2.cpp" />
   </ItemGroup>
 </Project>
