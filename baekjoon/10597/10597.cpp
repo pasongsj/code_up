@@ -3,42 +3,74 @@
 
 #include <iostream>
 #include <string>
-#include <list>
-#include <set>
+#include <vector>
+
+std::vector<int> answer;
+int max_value;
+
+void Print()
+{
+	for (int ans : answer)
+	{
+		std::cout << ans << ' ';
+	}
+	return;
+}
+
+
+bool DFS(int index, const std::string& str, std::vector<bool>& isvisted)
+{
+	if (index == str.size())
+	{
+		Print();
+		return true;
+	}
+	int fCur = std::stoi(str.substr(index, 1));
+	if (0 < fCur && fCur <= max_value && false == isvisted[fCur])
+	{
+		answer.push_back(fCur);
+		isvisted[fCur] = true;
+		if (true == DFS(index + 1, str, isvisted))
+		{
+			return true;
+		}
+
+		answer.pop_back();
+		isvisted[fCur] = false;
+	}
+	int sCur = std::stoi(str.substr(index, 2));
+	if (0 < sCur && sCur <= max_value && false == isvisted[sCur])
+	{
+		answer.push_back(sCur);
+		isvisted[sCur] = true;
+		if (true == DFS(index + 2, str, isvisted))
+		{
+			return true;
+		}
+
+		answer.pop_back();
+		isvisted[sCur] = false;
+	}
+	return false;
+}
 
 int main()
 {
 	std::string str;
 	std::cin >> str;
+	int len = str.size();
 
-	std::list<int> answer;
-	std::set<int> checker;
-
-	for (int i = str.size() - 1; i >= 0; i--)
-	{
-		std::string cur = "";
-		cur += str[i];
-		int curint = std::stoi(cur);
-		if (0 < curint && curint <= 50 && checker.end() == checker.find(curint))
-		{
-			answer.push_front(curint);
-			checker.insert(curint);
-		}
-		else
-		{
-			cur = str.substr(i - 1, 2);
-			curint = std::stoi(cur);
-			answer.push_front(curint);
-			checker.insert(curint);
-			i--;
-		}
-		
+	if (len < 10) {
+		max_value = len;
+	}
+	else {
+		max_value = (len - 9) / 2 + 9;
 	}
 
-	for (int ans : answer)
-	{
-		std::cout << ans << ' ';
-	}
+	std::vector<bool> isvisted(51,false);
+	DFS(0, str, isvisted);
+	
+	
 	return 0;
 }
 
