@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="2 x n 타일링.cpp" />
     <ClCompile Include="경주로건설.cpp" />
     <ClCompile Include="기지국설치.cpp" />
     <ClCompile Include="네트워크.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="입국심사.cpp" />
     <ClCompile Include="정수삼각형1.cpp" />
     <ClCompile Include="정수삼각형2.cpp" />
+    <ClCompile Include="최고의 집합.cpp" />
     <ClCompile Include="합승택시요금.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
