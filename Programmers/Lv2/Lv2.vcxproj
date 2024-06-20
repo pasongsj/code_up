@@ -163,6 +163,7 @@
     <ClCompile Include="튜플.cpp" />
     <ClCompile Include="파일명정렬.cpp" />
     <ClCompile Include="프린터.cpp" />
+    <ClCompile Include="피로도.cpp" />
     <ClCompile Include="피보나치수.cpp" />
     <ClCompile Include="할인행사.cpp" />
     <ClCompile Include="행렬의곱셈.cpp" />
