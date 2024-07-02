@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="2 x n 타일링.cpp" />
+    <ClCompile Include="거스름돈.cpp" />
     <ClCompile Include="경주로건설.cpp" />
     <ClCompile Include="기지국설치.cpp" />
     <ClCompile Include="네트워크.cpp" />

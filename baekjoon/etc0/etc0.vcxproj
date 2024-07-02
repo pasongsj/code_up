@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9de38b67-5ec2-44ad-855b-65d74551397e}</ProjectGuid>
-    <RootNamespace>Lv2</RootNamespace>
+    <ProjectGuid>{43683927-8399-4091-8da8-d976d06db5b5}</ProjectGuid>
+    <RootNamespace>etc0</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,52 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="12911.cpp" />
-    <ClCompile Include="H-Index.cpp" />
-    <ClCompile Include="JadenCase.cpp" />
-    <ClCompile Include="N개의최소공배수_1.cpp" />
-    <ClCompile Include="N개의최소공배수_2.cpp" />
-    <ClCompile Include="[1차] 뉴스 클러스터링.cpp" />
-    <ClCompile Include="[3차] n진수 게임.cpp" />
-    <ClCompile Include="[3차] 압축.cpp" />
-    <ClCompile Include="[PCCP 기출문제] 2번.cpp" />
-    <ClCompile Include="가장큰수.cpp" />
-    <ClCompile Include="게임맵최단거리.cpp" />
-    <ClCompile Include="괄호회전하기.cpp" />
-    <ClCompile Include="구명보트.cpp" />
-    <ClCompile Include="기능개발.cpp" />
-    <ClCompile Include="디펜스게임.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="멀리뛰기.cpp" />
-    <ClCompile Include="방문길이.cpp" />
-    <ClCompile Include="배달.cpp" />
-    <ClCompile Include="삼각달팽이.cpp" />
-    <ClCompile Include="위장.cpp" />
-    <ClCompile Include="이모티콘 할인행사.cpp" />
-    <ClCompile Include="이진변환반복하기.cpp" />
-    <ClCompile Include="전력망을둘로나누기.cpp" />
-    <ClCompile Include="전화번호목록.cpp" />
-    <ClCompile Include="점 찍기.cpp" />
-    <ClCompile Include="점프와순간이동.cpp" />
-    <ClCompile Include="주식가격.cpp" />
-    <ClCompile Include="최댓값과최솟값.cpp" />
-    <ClCompile Include="최솟값만들기.cpp" />
-    <ClCompile Include="카펫.cpp" />
-    <ClCompile Include="캐시.cpp" />
-    <ClCompile Include="큰수만들기.cpp" />
-    <ClCompile Include="타겟넘버.cpp" />
-    <ClCompile Include="튜플.cpp" />
-    <ClCompile Include="파일명정렬.cpp" />
-    <ClCompile Include="프린터.cpp" />
-    <ClCompile Include="피로도.cpp" />
-    <ClCompile Include="피보나치수.cpp" />
-    <ClCompile Include="할인행사.cpp" />
-    <ClCompile Include="행렬의곱셈.cpp" />
-    <ClCompile Include="호텔대실.cpp" />
-    <ClCompile Include="혼자놀기의달인.cpp" />
-    <ClCompile Include="후보키.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
