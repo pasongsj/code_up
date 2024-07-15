@@ -149,6 +149,7 @@
     <ClCompile Include="방문길이.cpp" />
     <ClCompile Include="배달.cpp" />
     <ClCompile Include="삼각달팽이.cpp" />
+    <ClCompile Include="시소 짝꿍.cpp" />
     <ClCompile Include="위장.cpp" />
     <ClCompile Include="이모티콘 할인행사.cpp" />
     <ClCompile Include="이진변환반복하기.cpp" />
