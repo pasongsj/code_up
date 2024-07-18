@@ -3,31 +3,6 @@
 
 #include <iostream>
 #include <vector>
-const int dx[4] = { -1, 0, 1, 0 };
-const int dy[4] = { 0, 1, 0, -1 };
-
-
-void GetNext(int& cx, int& cy, int& dir, int bound, int center)
-{
-	int nx = cx + dx[dir];
-	int ny = cy + dy[dir];
-
-	if (
-		center - bound <= nx && nx <= center + bound &&
-		center - bound <= ny && ny <= center + bound
-		)
-	{
-		cx = nx;
-		cy = ny;
-		return;
-	}
-	else
-	{
-		dir = (dir + 1) % 4;
-		cx = cx + dx[dir];
-		cy = cy + dy[dir];
-	}
-}
 
 
 int main()
@@ -37,32 +12,27 @@ int main()
 	std::cin >> n >> dest;
 	std::vector<std::vector<int>> arr(n+1,std::vector<int>(n+1,0));
 	
-	int num = 1;
-	int bound = 1;
 
-	int centerx = (n + 1) / 2, centery = (n + 1) / 2;
-	int cx = centerx, cy = centery;
+	int center = (n + 1) / 2;
 
-	int dir = 0;
-
-	arr[cx][cy] = num++;
-	while (true)
-	{
-		if (num > (bound * 2 + 1) * (bound * 2 + 1))
-		{
-			bound ++;
-		}
-		
-		GetNext(cx, cy, dir, bound, (n + 1) / 2);
-		arr[cx][cy] = num++;
-
-		if (num >= n * n + 1)
-		{
-			break;
-		}
-	}
+	arr[center][center] = 1;
 	
-	int answerx, answery;
+	for (int i = 1; i <= n / 2; ++i)
+	{
+		int num = (2 * i - 1) * (2 * i - 1);
+
+		for (int j = 1; j <= 2 * i; ++j)
+		{
+			arr[center - i][center - i + j] = num + j;
+			arr[center - i + j][center + i] = num + 2 * i + j;
+			arr[center + i][center + i - j] = num + 4 * i + j;
+			arr[center + i - j][center - i] = num + 6 * i + j;
+
+		}
+
+	}
+
+	int answerx = 0, answery = 0;
 	for (int i = 1; i <= n; ++i)
 	{
 		for (int j = 1; j <= n; ++j)
