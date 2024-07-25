@@ -1,62 +1,50 @@
-﻿// 1939.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+﻿// 11265.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
 //
 
 #include <iostream>
 #include <vector>
-#include <queue>
 
 int main()
 {
 	int n, m;
 	std::cin >> n >> m;
 
-	const int max_weight = 1000000000;
-
-	std::vector<std::vector<int> > links (n+1,std::vector<int>(n+1, -max_weight)) ;
-
-	links.resize(n + 1);
+	std::vector<std::vector<int>> road;
+	road.resize(n, std::vector<int>(n));
+	for (int i = 0;i < n;++i)
+	{
+		for (int j = 0;j < n;++j)
+		{
+			std::cin >> road[i][j];
+		}
+	}
+	for (int k = 0;k < n;++k)
+	{
+		for (int i = 0;i < n;++i)
+		{
+			for (int j = 0;j < n;++j)
+			{
+				if (road[i][j] > road[i][k] + road[k][j])
+				{
+					road[i][j] = road[i][k] + road[k][j];
+				}
+			}
+		}
+	}
 
 	for (int i = 0;i < m;++i)
 	{
 		int a, b, c;
 		std::cin >> a >> b >> c;
-		links[a][b] = std::min(c, links[a][b]);
-		links[b][a] = std::max(c, links[b][a]);
-	}
-
-	int start, dest;
-	std::cin >> start >> dest;
-
-	std::vector<int> dijk;
-
-	dijk.resize(n + 1, max_weight);
-	std::priority_queue<std::pair<int, int>> q;
-
-	q.push(std::make_pair(0, start));
-	while (!q.empty())
-	{
-		std::pair<int,int> cur = q.top();
-		q.pop();
-
-		for (int i = 1;i <= n;++i)
+		if (road[--a][--b] <= c)
 		{
-			if (links[cur.second][i] != -max_weight)
-			{
-				int dist = -(cur.first) + links[cur.second][i];
-
-				if (dist < dijk[i])
-				{
-					dijk[i] = dist;
-					q.push(std::make_pair(-dist, i));
-				}
-
-			}
+			std::cout << "Enjoy other party\n";
 		}
-
+		else
+		{
+			std::cout<<"Stay here\n";
+		}
 	}
-
-	std::cout << dijk[dest];
-	
 	return 0;
 }
 
