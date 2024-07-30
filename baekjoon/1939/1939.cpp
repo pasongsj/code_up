@@ -4,59 +4,27 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <tuple>
 
 int main()
 {
 	int n, m;
 	std::cin >> n >> m;
 
-	const int max_weight = 1000000000;
+	std::vector<std::vector<int>> afsdf(n + 1, std::vector<int>(n + 1, 0));
+	std::vector<bool> isvisted(n + 1, false);
+	std::vector<int> dist(n + 1, 0);
 
-	std::vector<std::vector<int> > links (n+1,std::vector<int>(n+1, -max_weight)) ;
-
-	links.resize(n + 1);
+	std::priority_queue <std::tuple<int, int, int>> links;
 
 	for (int i = 0;i < m;++i)
 	{
 		int a, b, c;
 		std::cin >> a >> b >> c;
-		links[a][b] = std::min(c, links[a][b]);
-		links[b][a] = std::max(c, links[b][a]);
+		links.push(std::make_tuple(c, a, b));
 	}
 
-	int start, dest;
-	std::cin >> start >> dest;
 
-	std::vector<int> dijk;
-
-	dijk.resize(n + 1, max_weight);
-	std::priority_queue<std::pair<int, int>> q;
-
-	q.push(std::make_pair(0, start));
-	while (!q.empty())
-	{
-		std::pair<int,int> cur = q.top();
-		q.pop();
-
-		for (int i = 1;i <= n;++i)
-		{
-			if (links[cur.second][i] != -max_weight)
-			{
-				int dist = -(cur.first) + links[cur.second][i];
-
-				if (dist < dijk[i])
-				{
-					dijk[i] = dist;
-					q.push(std::make_pair(-dist, i));
-				}
-
-			}
-		}
-
-	}
-
-	std::cout << dijk[dest];
-	
 	return 0;
 }
 
