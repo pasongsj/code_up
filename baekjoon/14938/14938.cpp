@@ -7,56 +7,55 @@
 
 int main()
 {
-	const int maxlen = 16;
+	const int max_len = 15;
 	int n, m, r;
 	std::cin >> n >> m >> r;
-	std::vector<int> items;
-	//std::vector<std::vector<int>> Links(n+1,std::vector<int>(n+1, maxlen));
-	std::vector<std::vector<std::pair<int, int>>> Links;
-
-	Links.resize(n + 1);
-	items.resize(n + 1);
+	std::vector<std::vector<int>> links(n + 1, std::vector<int>(n + 1, (max_len + 1) * n));
+	std::vector<int> weights(n + 1, 0);
 	for (int i = 1;i <= n;++i)
 	{
-		std::cin >> items[i];
+		std::cin >> weights[i];
 	}
-
-	for (int j = 0;j < r;++j)
+	for (int i = 0;i < r;++i)
 	{
-		int start, dest, cost;
-		std::cin >> start >> dest >> cost;
-		Links[start].push_back(std::make_pair(dest, cost));
-		Links[dest].push_back(std::make_pair(start, cost));
-		//Links[start][dest] = cost;
-		//Links[dest][start] = cost;
+		int a, b, l;
+		std::cin >> a >> b >> l;
+		links[a][b] = l;
+		links[b][a] = l;
 	}
-	for (int i = 1;i <= n;++i)
+	for (int k = 1;k <= n;++k)
 	{
-		std::vector<int> lastcost(n + 1, maxlen*n);
-		lastcost[i] = 0;
-		std::queue<std::pair<int,int>> q;
-		q.push(std::make_pair(i,0));
-		while (!q.empty())
+		for (int i = 1;i <= n;++i)
 		{
-			std::pair<int, int> cur = q.front();
-			q.pop();
-			if (cur.second > m)
+			for (int j = 1;j <= n;++j)
 			{
-				continue;
-			}
-			for (const std::pair<int, int>& next : Links[cur.first])
-			{
-				if (cur.second + next.second < lastcost[next.first])
+				if (i == j)
 				{
-					q.push(std::make_pair(next.first, cur.second + next.second));
-					lastcost[next.first] = (cur.second + next.second);
+					links[i][j] = 0;
+					continue;	
 				}
-				
+				if (links[i][j] > links[i][k] + links[k][j])
+				{
+					links[i][j] = links[i][k] + links[k][j];
+				}
 			}
-
 		}
 	}
-
+	int answer = 0;
+	for (int i = 1;i <= n;++i)
+	{
+		int cnt = 0;
+		for (int j = 1;j <= n;++j)
+		{
+			if (links[i][j] <= m)
+			{
+				cnt += weights[j];
+			}
+		}
+		answer = answer > cnt ? answer : cnt;
+	}
+	std::cout << answer;
+	return 0;
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
